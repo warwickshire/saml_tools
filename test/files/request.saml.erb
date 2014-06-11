@@ -1,0 +1,28 @@
+<samlp:AuthnRequest
+  AssertionConsumerServiceURL='<%= settings.assertion_consumer_service_url %>'
+  Destination='<%= settings.idp_sso_target_url %>'
+  ID='<%= settings.id %>'
+  IssueInstant='<%= settings.issue_instance %>'
+  Version='2.0'
+  xmlns:samlp='urn:oasis:names:tc:SAML:2.0:protocol'
+>
+  <saml:Issuer xmlns:saml='urn:oasis:names:tc:SAML:2.0:assertion'>
+    <%= settings.issuer %>
+  </saml:Issuer>
+  <samlp:NameIDPolicy
+    AllowCreate='true'
+    Format='<%= settings.name_identifier_format %>'
+    xmlns:samlp='urn:oasis:names:tc:SAML:2.0:protocol'
+  />
+  <samlp:RequestedAuthnContext
+    Comparison='exact'
+    xmlns:samlp='urn:oasis:names:tc:SAML:2.0:protocol'
+  >
+    <saml:AuthnContextClassRef
+      xmlns:saml='urn:oasis:names:tc:SAML:2.0:assertion'
+    >
+      <%= settings.authn_context %>
+    </saml:AuthnContextClassRef>
+  </samlp:RequestedAuthnContext>
+</samlp:AuthnRequest>
+

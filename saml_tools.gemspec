@@ -16,5 +16,6 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency 'nokogiri'
+  s.add_dependency 'hashie'
 
 end

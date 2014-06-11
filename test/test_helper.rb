@@ -9,6 +9,10 @@ class MiniTest::Unit::TestCase
     contents_of 'files/valid_saml_request.xml'
   end
 
+  def request_saml_erb
+    contents_of 'files/request.saml.erb'
+  end
+
   def contents_of(file_path)
     File.read File.expand_path(file_path, File.dirname(__FILE__))
   end
