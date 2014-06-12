@@ -4,6 +4,10 @@ module SamlTool
     attr_reader :saml
     attr_accessor :output
 
+    def self.encode(saml)
+      new(saml).encode
+    end
+
     def initialize(saml)
       @saml = saml
       @output = @saml.clone

@@ -3,6 +3,16 @@ require_relative '../../test_helper'
 module SamlTool
   class RedirectTest < MiniTest::Unit::TestCase
 
+    def test_uri
+      redirect = Redirect.uri(
+        to: url,
+        data: {
+          foo: 'bar'
+        }
+      )
+      assert_equal "#{url}?foo=bar", redirect
+    end
+
     def test_to_s 
       redirect = Redirect.new(
         to: url,
@@ -40,6 +50,16 @@ module SamlTool
         data: 'foo=bar'
       )
       assert_equal "#{url}?foo=bar", redirect.to_s
+    end
+
+    def test_to_s_escapes_data
+      redirect = Redirect.new(
+        to: url,
+        data: {
+          foo: '<bar>'
+        }
+      )
+      assert_equal "#{url}?foo=%3Cbar%3E", redirect.to_s
     end
 
     def url

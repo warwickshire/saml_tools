@@ -3,6 +3,12 @@ require_relative '../../test_helper'
 module SamlTool
   class EncoderTest < MiniTest::Unit::TestCase
 
+    def test_class_encode
+      encoded_saml = Encoder.encode(saml)
+      inflate Base64.decode64(encoded_saml)
+      assert_equal saml, @inflated
+    end
+
     def test_encode
       encoded_saml = Encoder.new(saml).encode
       inflate Base64.decode64(encoded_saml)

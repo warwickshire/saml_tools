@@ -4,6 +4,10 @@ module SamlTool
     
     attr_reader :args, :settings, :template
 
+    def self.build(args)
+      new(args).to_s
+    end
+
     def initialize(args)
       @args = args
       @settings = args[:settings]

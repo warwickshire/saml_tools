@@ -3,6 +3,14 @@ require_relative '../../test_helper'
 module SamlTool
   class ErbBuilderTest < MiniTest::Unit::TestCase
 
+    def test_build
+      saml = ErbBuilder.build(
+        template: '<foo><%= settings %></foo>',
+        settings: 'bar'
+      )
+      assert_equal '<foo>bar</foo>', saml
+    end
+
     def test_erb
       saml = ErbBuilder.new(
         template: '<foo><%= settings %></foo>',

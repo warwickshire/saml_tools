@@ -1,8 +1,13 @@
 require 'uri'
+require 'cgi'
 module SamlTool
 
   class Redirect
     attr_reader :to, :data
+
+    def self.uri(args)
+      new(args).to_s
+    end
 
     def initialize(args)
       @to = args[:to]
@@ -15,7 +20,7 @@ module SamlTool
 
     def data_string
       return data if data.kind_of? String
-      data.to_a.collect{|pair| pair.join('=')}.join('&')
+      data.to_a.collect{|pair| pair.collect{|p| CGI.escape(p.to_s)}.join('=')}.join('&')
     end
 
     def append_data
