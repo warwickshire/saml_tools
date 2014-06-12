@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- This file has been modified so that import elements point at local uris -->
 <schema
     targetNamespace="urn:oasis:names:tc:SAML:2.0:protocol"
     xmlns="http://www.w3.org/2001/XMLSchema"
@@ -9,10 +10,16 @@
     attributeFormDefault="unqualified"
     blockDefault="substitution"
     version="2.0">
+    <!-- original
     <import namespace="urn:oasis:names:tc:SAML:2.0:assertion"
-        schemaLocation="saml-schema-assertion-2.0.xsd"/>
+        schemaLocation="saml-schema-assertion-2.0.xsd"/>    
     <import namespace="http://www.w3.org/2000/09/xmldsig#"
         schemaLocation="http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd"/>
+    -->
+    <import namespace="urn:oasis:names:tc:SAML:2.0:assertion"
+        schemaLocation="localised-saml-schema-assertion-2.0.xsd"/><!-- localised version -->
+    <import namespace="http://www.w3.org/2000/09/xmldsig#"
+        schemaLocation="xmldsig-core-schema.xsd"/><!-- localised version -->
     <annotation>
         <documentation>
             Document identifier: saml-schema-protocol-2.0

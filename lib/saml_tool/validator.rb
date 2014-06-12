@@ -19,7 +19,7 @@ module SamlTool
       # Need to load schema with other schemas in path
       # see http://ktulu.com.ar/blog/2011/06/26/resolving-validation-errors-using-nokogiri-and-schemas/
       Dir.chdir(schema_path) do
-        schema = Nokogiri::XML::Schema(File.read('saml-schema-protocol-2.0.xsd'))
+        schema = Nokogiri::XML::Schema(File.read('localised-saml-schema-protocol-2.0.xsd'))
 
         schema.validate(saml_document).each do |error|
           errors << error.message unless errors.include? error.message

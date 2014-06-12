@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- This file has been modified so that import elements point at local uris -->
 <!DOCTYPE schema  PUBLIC "-//W3C//DTD XMLSchema 200102//EN"
  "http://www.w3.org/2001/XMLSchema.dtd"
  [
@@ -15,9 +16,13 @@
         xmlns:ds='http://www.w3.org/2000/09/xmldsig#'
         targetNamespace='http://www.w3.org/2001/04/xmlenc#'
         elementFormDefault='qualified'>
-
+  <!-- original
   <import namespace='http://www.w3.org/2000/09/xmldsig#'
           schemaLocation='http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd'/>
+  -->
+  
+  <import namespace='http://www.w3.org/2000/09/xmldsig#'
+          schemaLocation='xmldsig-core-schema.xsd'/><!-- localised version -->
 
   <complexType name='EncryptedType' abstract='true'>
     <sequence>
