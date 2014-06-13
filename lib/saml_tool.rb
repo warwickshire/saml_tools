@@ -12,4 +12,5 @@ module SamlTool
   require_relative 'saml_tool/encoder'
   require_relative 'saml_tool/redirect'
   require_relative 'saml_tool/settings'
+  require_relative 'saml_tool/saml'
 end

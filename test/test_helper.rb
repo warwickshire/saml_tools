@@ -16,5 +16,9 @@ class MiniTest::Unit::TestCase
   def contents_of(file_path)
     File.read File.expand_path(file_path, File.dirname(__FILE__))
   end
+  
+  def valid_xml
+    '<foo>bar</foo>'
+  end
 
 end
