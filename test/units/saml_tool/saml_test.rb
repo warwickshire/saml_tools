@@ -1,7 +1,7 @@
 
 
 module SamlTool
-  class SamlTest < MiniTest::Unit::TestCase
+  class SamlTest < Minitest::Test
     
     def test_document     
       document = SamlTool::SAML(valid_xml)    

@@ -1,7 +1,7 @@
 require_relative '../../test_helper'
 
 module SamlTool
-  class SettingsTest < MiniTest::Unit::TestCase
+  class SettingsTest < Minitest::Test
 
     def test_creation
       assert_equal 'bar', settings.foo    

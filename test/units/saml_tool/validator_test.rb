@@ -1,7 +1,7 @@
 require_relative '../../test_helper'
 
 module SamlTool
-  class ValidatorTest < MiniTest::Unit::TestCase
+  class ValidatorTest < Minitest::Test
 
     def test_valid
       validator = Validator.new(valid_saml_request)

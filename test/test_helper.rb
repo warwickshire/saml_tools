@@ -1,9 +1,10 @@
 $:.unshift File.join(File.dirname(__FILE__),'..','lib')
 
+require 'minitest'
 require 'minitest/autorun'
 require 'saml_tool'
 
-class MiniTest::Unit::TestCase
+class Minitest::Test
 
   def valid_saml_request
     contents_of 'files/valid_saml_request.xml'
@@ -19,6 +20,10 @@ class MiniTest::Unit::TestCase
   
   def valid_xml
     '<foo>bar</foo>'
+  end
+
+  def saml
+    '<foo>something that behaves like saml</foo>'
   end
 
 end

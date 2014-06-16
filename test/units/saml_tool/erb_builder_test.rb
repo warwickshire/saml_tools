@@ -1,7 +1,7 @@
 require_relative '../../test_helper'
 
 module SamlTool
-  class ErbBuilderTest < MiniTest::Unit::TestCase
+  class ErbBuilderTest < Minitest::Test
 
     def test_build
       saml = ErbBuilder.build(

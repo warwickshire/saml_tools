@@ -1,7 +1,7 @@
 require_relative '../../test_helper'
 
 module SamlTool
-  class RedirectTest < MiniTest::Unit::TestCase
+  class RedirectTest < Minitest::Test
 
     def test_uri
       redirect = Redirect.uri(
