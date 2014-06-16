@@ -26,6 +26,21 @@ module SamlTool
                )
       assert_equal 'that', reader.foo
     end
+
+    def test_to_hash
+      reader = Reader.new(
+        nested_saml,
+        {
+          foo: 'level_one/foo[1]/text()',
+          this: 'level_one/foo[1]/@this'
+        }
+      )
+      expected = {
+        foo: 'bar',
+        this: 'that'
+      }
+      assert_equal expected, reader.to_hash
+    end
     
     class FooReader < Reader
       def initialize(saml)

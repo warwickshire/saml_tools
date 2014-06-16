@@ -9,7 +9,11 @@ module SamlTool
       build_methods
     end
 
+    def to_hash
+      config.keys.inject({}){|hash, key| hash[key.to_sym] = send(key.to_sym); hash}
+    end
 
+    private
     def build_methods
       @config.each do |key, value|
         self.class.send :attr_reader, key.to_sym
