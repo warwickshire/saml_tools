@@ -21,6 +21,21 @@ module SamlTool
       expected = Digest::SHA1.hexdigest(response_document.certificate.to_der)
       assert_equal expected, response_document.fingerprint
     end
+    
+    def test_canonicalization_method
+      expected = response_document_saml.xpath('//ds:CanonicalizationMethod/@Algorithm', { 'ds' => dsig })
+      assert_equal expected.to_s, response_document.canonicalization_method
+    end
+    
+    def test_canonicalization_algorithm
+      expected = Nokogiri::XML::XML_C14N_EXCLUSIVE_1_0
+      assert_equal expected, response_document.canonicalization_algorithm
+    end
+    
+    def test_reference_uri
+      expected = response_document_saml.xpath('//ds:Reference/@URI', { 'ds' => dsig })
+      assert_equal expected.to_s, response_document.reference_uri
+    end
 
     def response_document
       @response_document ||= ResponseReader.new(response_xml)
