@@ -14,6 +14,7 @@ module SamlTool
   require_relative 'saml_tool/redirect'
   require_relative 'saml_tool/settings'
   require_relative 'saml_tool/reader'
+  require_relative 'saml_tool/response_reader'
   require_relative 'saml_tool/saml'
   require_relative 'saml_tool/signature'
 end
