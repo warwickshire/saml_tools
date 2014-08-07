@@ -26,6 +26,15 @@ module SamlTool
                )
       assert_equal 'that', reader.foo
     end
+    
+    def test_reader_with_name_space
+      reader =  Reader.new(
+                  response_xml,
+                  {foo: '//ds:X509Certificate/text()'},
+                  {ds: 'http://www.w3.org/2000/09/xmldsig#'}
+                )
+      assert_equal 'MIIBrT', reader.foo[0...6]
+    end
 
     def test_to_hash
       reader = Reader.new(

@@ -13,6 +13,10 @@ class Minitest::Test
   def request_saml_erb
     contents_of 'files/request.saml.erb'
   end
+  
+  def response_xml
+    contents_of 'files/response.xml'
+  end
 
   def contents_of(file_path)
     File.read File.expand_path(file_path, File.dirname(__FILE__))

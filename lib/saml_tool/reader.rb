@@ -1,11 +1,12 @@
 
 module SamlTool
   class Reader
-    attr_reader :saml, :config
+    attr_reader :saml, :config, :namespaces
 
-    def initialize(saml, config = {})
+    def initialize(saml, config = {}, namespaces = {})
       @saml = SamlTool::SAML(saml)
       @config = Hashie::Mash.new(config)
+      @namespaces = namespaces
       build_methods
     end
 
@@ -17,7 +18,8 @@ module SamlTool
     def build_methods
       @config.each do |key, value|
         self.class.send :attr_reader, key.to_sym
-        instance_variable_set("@#{key}".to_sym, saml.xpath(value).to_s)
+        contents = saml.xpath(value, namespaces)
+        instance_variable_set("@#{key}".to_sym, contents.to_s)
       end
     end
 
