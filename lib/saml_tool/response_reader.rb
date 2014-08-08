@@ -2,12 +2,30 @@ require "openssl"
 
 module SamlTool
   class ResponseReader < Reader
+    
+    # On creation, the keys for this hash will be converted into methods that
+    # will return the text gathered at the xpath in the matching value.
+    def default_config
+      {
+        base64_cert:             '//ds:X509Certificate/text()',
+        canonicalization_method: '//ds:CanonicalizationMethod/@Algorithm',
+        reference_uri:           '//ds:Reference/@URI',
+        inclusive_namespaces:    '//ec:InclusiveNamespaces/@PrefixList',
+        digest_algorithm:        '//ds:DigestMethod/@Algorithm',
+        digest_value:            '//ds:DigestValue/text()'
+      }
+    end 
+    
     def initialize(saml, config = {}, namespaces = {})    
       super(
         saml,
         config.merge(default_config),
         namespaces.merge(default_namespaces)
       )
+    end
+    
+    def signatureless
+      @signatureless ||= clone_saml_and_remove_signature
     end
     
     def certificate
@@ -19,7 +37,7 @@ module SamlTool
     end
     
     def fingerprint
-      @fingerprint||= Digest::SHA1.hexdigest(certificate.to_der)
+      @fingerprint ||= Digest::SHA1.hexdigest(certificate.to_der)
     end
     
     def canonicalization_algorithm
@@ -30,17 +48,49 @@ module SamlTool
       end
     end
     
-    def default_config
-      {
-        base64_cert: '//ds:X509Certificate/text()',
-        canonicalization_method: '//ds:CanonicalizationMethod/@Algorithm',
-        reference_uri: '//ds:Reference/@URI'
-      }
+    def hashed_element
+      @hashed_element ||= signatureless.at_xpath("//*[@ID='#{reference_uri[1..-1]}']")
+    end
+    
+    def canonicalized_hashed_element
+      hashed_element.canonicalize(
+        canonicalization_algorithm, 
+        inclusive_namespaces.split(' ')
+      )
+    end
+    
+    def digest_algorithm_class
+      @digest_algorithm_class ||= determine_digest_algorithm_class
+    end
+  
+    def determine_digest_algorithm_class
+      case digest_algorithm.slice(/sha(\d+)\s*$/, 1)
+      when '256' then OpenSSL::Digest::SHA256
+      when '384' then OpenSSL::Digest::SHA384
+      when '512' then OpenSSL::Digest::SHA512
+      else
+        OpenSSL::Digest::SHA1
+      end
+    end
+    
+    def digest_hash
+      @digest_hash ||= digest_algorithm_class.digest(canonicalized_hashed_element.to_s)
+    end
+    
+    def decoded_digest_value
+      Base64.decode64(digest_value)
+    end
+    
+    def clone_saml_and_remove_signature
+      cloned_saml = saml.clone
+      cloned_saml.xpath('//ds:Signature', namespaces).remove
+      return cloned_saml
     end
     
     def default_namespaces
       {
-        ds: dsig
+        ds: dsig,
+        ec: c14m
       }
     end
     

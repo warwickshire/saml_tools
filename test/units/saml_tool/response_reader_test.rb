@@ -8,6 +8,18 @@ module SamlTool
       assert_kind_of SAML::Document, response_document.saml
     end
     
+    def test_signatureless
+      assert_kind_of SAML::Document, response_document.signatureless
+      expected = response_document.saml.clone
+      expected.xpath('//ds:Signature', { 'ds' => dsig }).remove
+      assert_equal expected.to_s, response_document.signatureless.to_s
+    end
+    
+    def test_signatureless_does_not_impact_saml
+      response_document.signatureless
+      assert response_document.saml.to_s != response_document.signatureless.to_s, 'Changes made in forming signatureless should not also happen to saml'
+    end
+    
     def test_base64_cert
       base64_cert = response_document_saml.xpath('//ds:X509Certificate/text()', { 'ds' => dsig })
       assert_equal base64_cert.to_s, response_document.base64_cert
@@ -36,9 +48,54 @@ module SamlTool
       expected = response_document_saml.xpath('//ds:Reference/@URI', { 'ds' => dsig })
       assert_equal expected.to_s, response_document.reference_uri
     end
+    
+    def test_inclusive_namespaces
+      assert_equal "", response_document.inclusive_namespaces
+    end
+    
+    def test_inclusive_namespaces_when_they_exist_in_saml
+      document = ResponseReader.new(open_saml_request)
+      assert_equal 'xs', document.inclusive_namespaces
+    end
+    
+    def test_hashed_element
+      remove_signature_from_assertion
+      assert_equal assertion.to_s, response_document.hashed_element.to_s
+    end
+    
+    def test_canonicalized_hashed_element
+      remove_signature_from_assertion
+      expected = assertion.canonicalize(Nokogiri::XML::XML_C14N_EXCLUSIVE_1_0, [])
+      assert_equal expected, response_document.canonicalized_hashed_element
+    end
+    
+    def test_digest_algorithm
+      assert_equal 'http://www.w3.org/2000/09/xmldsig#sha1', response_document.digest_algorithm
+    end
+    
+    def test_digest_algorithm_class
+      assert_equal OpenSSL::Digest::SHA1, response_document.digest_algorithm_class
+    end
+    
+    def test_digest_hash
+      expected = OpenSSL::Digest::SHA1.digest(response_document.canonicalized_hashed_element)
+      assert_equal expected, response_document.digest_hash
+    end
+    
+    def test_digest_hash_matches_digest_value
+      assert_equal response_document.digest_hash, response_document.decoded_digest_value
+    end
 
     def response_document
       @response_document ||= ResponseReader.new(response_xml)
+    end
+    
+    def assertion
+      @assertion ||= response_document_saml.at_xpath('//saml:Assertion')
+    end
+    
+    def remove_signature_from_assertion
+      assertion.xpath('//ds:Signature', { 'ds' => dsig }).remove
     end
     
     def response_document_saml

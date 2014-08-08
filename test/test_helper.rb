@@ -17,6 +17,10 @@ class Minitest::Test
   def response_xml
     contents_of 'files/response.xml'
   end
+  
+  def open_saml_request
+    contents_of 'files/open_saml_response.xml'
+  end
 
   def contents_of(file_path)
     File.read File.expand_path(file_path, File.dirname(__FILE__))
