@@ -18,8 +18,21 @@ module SamlTool
     def build_methods
       @config.each do |key, value|
         self.class.send :attr_reader, key.to_sym
-        contents = saml.xpath(value, namespaces)
-        instance_variable_set("@#{key}".to_sym, contents.to_s)
+        source = saml.xpath(value, namespaces)
+        content = Content.new(source)
+        instance_variable_set("@#{key}".to_sym, content)
+      end
+    end
+    
+    # A string with memory of the element that was the source of its content.
+    # Typically, the source will be a Nokogiri::XML::NodeSet. So:
+    #     content           --> text from an element.
+    #     content.source    --> the Nokogiri NodeSet the text was extracted from.
+    class Content < String    
+      attr_reader :source
+      def initialize(source)
+        @source = source
+        super(source.to_s)
       end
     end
 
