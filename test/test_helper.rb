@@ -15,7 +15,8 @@ class Minitest::Test
   end
   
   def response_xml
-    contents_of 'files/response.xml'
+    Base64.decode64 contents_of 'files/response.xml.base64'
+    contents_of 'files/response.xml' 
   end
   
   def open_saml_request
