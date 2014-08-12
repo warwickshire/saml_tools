@@ -90,8 +90,7 @@ module SamlTool
     def default_namespaces
       {
         ds: dsig,
-        ec: c14m,
-        saml: saml_namespace
+        ec: c14m
       }
     end
     
@@ -103,8 +102,5 @@ module SamlTool
       'http://www.w3.org/2000/09/xmldsig#'
     end
 
-    def saml_namespace
-      'urn:oasis:names:tc:SAML:2.0:assertion'
-    end
   end
 end
