@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
 <samlp:Response xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" ID="GOSAMLR12901174571794" Version="2.0" IssueInstant="2010-11-18T21:57:37Z" Destination="{recipient}">
   <samlp:Status>
     <samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/></samlp:Status>
@@ -6,58 +5,28 @@
     <saml:Issuer>https://app.onelogin.com/saml/metadata/13590</saml:Issuer>
     <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
      <SignedInfo>
-      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+      <CanonicalizationMethod Algorithm=
+       "http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+      <SignatureMethod Algorithm=
+       "http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
       <Reference URI="#pfxa46574df-b3b0-a06a-23c8-636413198772">
        <Transforms>
-        <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+        <Transform Algorithm=
+         "http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
        </Transforms>
-       <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-       <DigestValue>YItEpV0VaEcaafv9X7sFXvSiz2o=</DigestValue>
+       <DigestMethod Algorithm=
+         "http://www.w3.org/2000/09/xmldsig#sha1"/>
+       <DigestValue></DigestValue>
       </Reference>
      </SignedInfo>
-     <SignatureValue>QZcM+V3tDw2yOHEWi7hUDyOFRbmIpwW/dvTFoRi6dkH3bnh3jBVUNZuTu9pHcs5X
-qSFmL2C0zpWomKtxGvxfyIY2dDl8Gbwv+MZssDQ0u/Ce2hh84B6XtW3DtHy8hKSQ
-WgQA/pKoncL0ZOqmCKclPiM/3bkPUYu54JrtIj9YsPc=</SignatureValue>
+     <SignatureValue />
      <KeyInfo>
-      <X509Data>
-       
-       
-       
-      <X509Certificate>MIIC6DCCAlGgAwIBAgICAR4wDQYJKoZIhvcNAQEFBQAwgYcxCzAJBgNVBAYTAkNM
-MQswCQYDVQQIEwJSTTERMA8GA1UEBxMIU2FudGlhZ28xHDAaBgNVBAoTE2xpdHRs
-ZWNyeXB0b2dyYXBoZXIxGTAXBgNVBAMTEFBoaWxpcHBlIENhbWFjaG8xHzAdBgkq
-hkiG9w0BCQEWEGxvc3RpbG9zQGZyZWUuZnIwHhcNMDgwMTE5MTI1MjM3WhcNMDkw
-MTE4MTI1MjM3WjBuMQswCQYDVQQGEwJDTDELMAkGA1UECBMCUk0xHDAaBgNVBAoT
-E2xpdHRsZWNyeXB0b2dyYXBoZXIxEzARBgNVBAMTCkpvaG4gU21pdGgxHzAdBgkq
-hkiG9w0BCQEWEGpzbWl0aEBoZWxsby5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0A
-MIGJAoGBALwShIDVij20XFC8V3Bs8Xn6b3uRa8rnPgkMCc92LoxNc/IzCriw9gu9
-NGps/bwanWgZbK5va46Y27axFhHo2uNk9ZE2lj0UQegFdBGlEIOt9hlpHFSqTnmX
-AKraSHd2yxhVe+JqGIrtyTQluWVNPOCKXd8zubFgWqlUMXMrn8JzAgMBAAGjezB5
-MAkGA1UdEwQCMAAwLAYJYIZIAYb4QgENBB8WHU9wZW5TU0wgR2VuZXJhdGVkIENl
-cnRpZmljYXRlMB0GA1UdDgQWBBQ08GE4h2jHJZOGkDUyQE9EEPMqlDAfBgNVHSME
-GDAWgBT+y1YLKOsq6cec6uU61UxVhNvUajANBgkqhkiG9w0BAQUFAAOBgQAVZMDa
-KVhvX2qOMlcjX7i6DESF7SDyEbjfPk+bYIDm+al45lmzixkFeYUUQcFJMG0s152A
-kFd/fTVMfz/j37OQYxUYwwZQlMW3dVnC+CvjtMlSrReeHThhQFQpO16i21aDitON
-1TFsvO8T+21YGB4kne44vry6O4JJPy8EZBsfbw==</X509Certificate>
-<X509SubjectName>emailAddress=jsmith@hello.com,CN=John Smith,O=littlecryptographer,ST=RM,C=CL</X509SubjectName>
-<X509IssuerSerial>
-<X509IssuerName>emailAddress=lostilos@free.fr,CN=Philippe Camacho,O=littlecryptographer,L=Santiago,ST=RM,C=CL</X509IssuerName>
-<X509SerialNumber>286</X509SerialNumber>
-</X509IssuerSerial>
-</X509Data>
-      <KeyValue>
-<RSAKeyValue>
-<Modulus>
-vBKEgNWKPbRcULxXcGzxefpve5Fryuc+CQwJz3YujE1z8jMKuLD2C700amz9vBqd
-aBlsrm9rjpjbtrEWEeja42T1kTaWPRRB6AV0EaUQg632GWkcVKpOeZcAqtpId3bL
-GFV74moYiu3JNCW5ZU084Ipd3zO5sWBaqVQxcyufwnM=
-</Modulus>
-<Exponent>
-AQAB
-</Exponent>
-</RSAKeyValue>
-</KeyValue>
+      <X509Data >
+       <X509SubjectName/>
+       <X509IssuerSerial/>
+       <X509Certificate/>
+      </X509Data>
+      <KeyValue />
      </KeyInfo>
     </Signature>
     <saml:Subject>

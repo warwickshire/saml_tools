@@ -74,23 +74,24 @@ module SamlTool
     end
     
     def digest_hash
-      @digest_hash ||= digest_algorithm_class.digest(canonicalized_hashed_element.to_s)
+      @digest_hash ||= digest_algorithm_class.digest(canonicalized_hashed_element)
     end
     
     def decoded_digest_value
       Base64.decode64(digest_value)
     end
-    
+
     def clone_saml_and_remove_signature
       cloned_saml = saml.clone
       cloned_saml.xpath('//ds:Signature', namespaces).remove
-      return cloned_saml
+      return SamlTool::SAML(cloned_saml.to_s)
     end
     
     def default_namespaces
       {
         ds: dsig,
-        ec: c14m
+        ec: c14m,
+        saml: saml_namespace
       }
     end
     
@@ -100,6 +101,10 @@ module SamlTool
         
     def dsig
       'http://www.w3.org/2000/09/xmldsig#'
+    end
+
+    def saml_namespace
+      'urn:oasis:names:tc:SAML:2.0:assertion'
     end
   end
 end

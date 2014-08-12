@@ -40,7 +40,7 @@ module SamlTool
     end
     
     def test_canonicalization_algorithm
-      expected = Nokogiri::XML::XML_C14N_EXCLUSIVE_1_0
+      expected = Nokogiri::XML::XML_C14N_1_0
       assert_equal expected, response_document.canonicalization_algorithm
     end
     
@@ -65,7 +65,7 @@ module SamlTool
     
     def test_canonicalized_hashed_element
       remove_signature_from_assertion
-      expected = assertion.canonicalize(Nokogiri::XML::XML_C14N_EXCLUSIVE_1_0, [])
+      expected = assertion.canonicalize(Nokogiri::XML::XML_C14N_1_0, [])
       assert_equal expected, response_document.canonicalized_hashed_element
     end
     

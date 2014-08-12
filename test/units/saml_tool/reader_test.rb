@@ -33,7 +33,7 @@ module SamlTool
                   {foo: '//ds:X509Certificate/text()'},
                   {ds: 'http://www.w3.org/2000/09/xmldsig#'}
                 )
-      assert_equal 'MIIBrT', reader.foo[0...6]
+      assert_equal 'MIIC6D', reader.foo[0...6]
     end
     
     def test_value_remembers_source
