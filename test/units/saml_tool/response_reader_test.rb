@@ -113,6 +113,10 @@ module SamlTool
       assert_equal true, response_document.structurally_valid?
     end
 
+    def test_valid
+      assert_equal true, response_document.valid?
+    end
+
     def response_document
       @response_document ||= ResponseReader.new(response_xml)
     end

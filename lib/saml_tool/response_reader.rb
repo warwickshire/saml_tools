@@ -26,6 +26,10 @@ module SamlTool
         namespaces.merge(default_namespaces)
       )
     end
+
+    def valid?
+      structurally_valid? && signature_verified? && digests_match?
+    end
     
     def signatureless
       @signatureless ||= clone_saml_and_remove_signature
