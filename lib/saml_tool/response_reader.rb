@@ -54,6 +54,11 @@ module SamlTool
         canonicalized_signed_info
       )
     end
+
+
+    def structurally_valid?
+      Validator.new(saml.to_s).valid?
+    end
     
     def canonicalization_algorithm
       case canonicalization_method

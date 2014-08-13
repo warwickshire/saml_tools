@@ -108,6 +108,11 @@ module SamlTool
       assert_equal true, response_document.signature_verified?
     end
 
+    def test_structurally_valid
+      assert Validator.new(response_xml).valid?, 'response.xml needs to be valid SAML'
+      assert_equal true, response_document.structurally_valid?
+    end
+
     def response_document
       @response_document ||= ResponseReader.new(response_xml)
     end
