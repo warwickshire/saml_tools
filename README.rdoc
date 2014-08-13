@@ -1,3 +1,8 @@
 =SAML Tools
 
 Tools to simplify the creation, validation and sending of SAML objects
+
+== Further reading
+
+I've {blogged here}[http://undervale.co.uk/blog/?p=490] about some of highs and
+lows of building these tools.
