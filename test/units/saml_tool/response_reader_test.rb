@@ -86,6 +86,28 @@ module SamlTool
       assert_equal response_document.digest_hash, response_document.decoded_digest_value
     end
 
+    def test_digests_match?
+      assert_equal true, response_document.digests_match?
+    end
+
+    def test_signature
+      signature_value = response_document_saml.xpath('//ds:SignatureValue', { 'ds' => dsig }).text
+      assert_equal Base64.decode64(signature_value), response_document.signature
+    end
+
+    def test_signature_algorithm_class
+      assert_equal OpenSSL::Digest::SHA1, response_document.signature_algorithm_class
+    end
+
+    def test_canonicalized_signed_info
+      expected = response_document.signed_info.source.first.canonicalize(Nokogiri::XML::XML_C14N_1_0, [])
+      assert_equal expected, response_document.canonicalized_signed_info
+    end
+
+    def test_signature_verified
+      assert_equal true, response_document.signature_verified?
+    end
+
     def response_document
       @response_document ||= ResponseReader.new(response_xml)
     end

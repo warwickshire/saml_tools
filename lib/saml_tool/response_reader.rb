@@ -12,7 +12,10 @@ module SamlTool
         reference_uri:           '//ds:Reference/@URI',
         inclusive_namespaces:    '//ec:InclusiveNamespaces/@PrefixList',
         digest_algorithm:        '//ds:DigestMethod/@Algorithm',
-        digest_value:            '//ds:DigestValue/text()'
+        digest_value:            '//ds:DigestValue/text()',
+        signature_value:         '//ds:SignatureValue/text()',
+        signature_algorithm:     '//ds:SignatureMethod/@Algorithm',
+        signed_info:             '//ds:SignedInfo'
       }
     end 
     
@@ -39,6 +42,18 @@ module SamlTool
     def fingerprint
       @fingerprint ||= Digest::SHA1.hexdigest(certificate.to_der)
     end
+
+    def signature
+      @signature ||= Base64.decode64(signature_value)
+    end
+
+    def signature_verified?
+      certificate.public_key.verify(
+        signature_algorithm_class.new,
+        signature,
+        canonicalized_signed_info
+      )
+    end
     
     def canonicalization_algorithm
       case canonicalization_method
@@ -58,13 +73,28 @@ module SamlTool
         inclusive_namespaces.split(' ')
       )
     end
+
+    def canonicalized_signed_info
+      signed_info_element.canonicalize(
+        canonicalization_algorithm,
+        inclusive_namespaces.split(' ')
+      )
+    end
+
+    def signed_info_element
+      signed_info.source.first
+    end
     
     def digest_algorithm_class
-      @digest_algorithm_class ||= determine_digest_algorithm_class
+      @digest_algorithm_class ||= determine_algorithm_class(digest_algorithm)
+    end
+
+    def signature_algorithm_class
+      @signature_algorithm_class ||= determine_algorithm_class(signature_algorithm)
     end
   
-    def determine_digest_algorithm_class
-      case digest_algorithm.slice(/sha(\d+)\s*$/, 1)
+    def determine_algorithm_class(method_text)
+      case method_text.slice(/sha(\d+)\s*$/, 1)
       when '256' then OpenSSL::Digest::SHA256
       when '384' then OpenSSL::Digest::SHA384
       when '512' then OpenSSL::Digest::SHA512
@@ -79,6 +109,10 @@ module SamlTool
     
     def decoded_digest_value
       Base64.decode64(digest_value)
+    end
+
+    def digests_match?
+      digest_hash == decoded_digest_value
     end
 
     def clone_saml_and_remove_signature
