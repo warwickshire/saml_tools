@@ -1,0 +1,22 @@
+= Test files
+
+== response.xml
+
+response.xml was built using xmlsec1 on Ubuntu.
+
+It was based on a response found in ruby-saml's {test suite}[https://github.com/onelogin/ruby-saml/tree/master/test/responses].
+
+The process was very heavily influenced by Philippe Camacho's {"An Introduction
+to XML Signature and XML Encryption with XMLSec"}[http://users.dcc.uchile.cl/~pcamacho/tutorial/web/xmlsec/xmlsec.html]
+
+From these two sources a template was built (test/files/response_template.xml),
+and then this was signed using the certificates from Phillipe's page.
+
+To rebuild the response.xml, open a console at test/files and run the following
+command:
+
+    xmlsec1 --sign --output response.xml --pwd hello --pkcs12 usercert.p12 --trusted-pem cacert.pem --id-attr:ID urn:oasis:names:tc:SAML:2.0:assertion:Assertion response_template.xml
+
+The resulting response.xml can be verified using:
+
+    xmlsec1 --verify response.xml
