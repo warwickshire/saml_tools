@@ -30,6 +30,22 @@ module SamlTool
     def valid?
       structurally_valid? && signature_verified? && digests_match?
     end
+
+    def structurally_valid?
+      Validator.new(saml.to_s).valid?
+    end
+
+    def signature_verified?
+      certificate.public_key.verify(
+        signature_algorithm_class.new,
+        signature,
+        canonicalized_signed_info
+      )
+    end
+
+    def digests_match?
+      digest_hash == decoded_digest_value
+    end
     
     def signatureless
       @signatureless ||= clone_saml_and_remove_signature
@@ -49,19 +65,6 @@ module SamlTool
 
     def signature
       @signature ||= Base64.decode64(signature_value)
-    end
-
-    def signature_verified?
-      certificate.public_key.verify(
-        signature_algorithm_class.new,
-        signature,
-        canonicalized_signed_info
-      )
-    end
-
-
-    def structurally_valid?
-      Validator.new(saml.to_s).valid?
     end
     
     def canonicalization_algorithm
@@ -118,10 +121,6 @@ module SamlTool
     
     def decoded_digest_value
       Base64.decode64(digest_value)
-    end
-
-    def digests_match?
-      digest_hash == decoded_digest_value
     end
 
     def clone_saml_and_remove_signature
