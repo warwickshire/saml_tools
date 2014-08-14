@@ -5,6 +5,7 @@ require 'hashie'
 require 'securerandom'
 require 'base64'
 require 'zlib'
+require 'openssl'
 
 module SamlTool
   require_relative 'saml_tool/validator'
@@ -16,5 +17,4 @@ module SamlTool
   require_relative 'saml_tool/reader'
   require_relative 'saml_tool/response_reader'
   require_relative 'saml_tool/saml'
-  require_relative 'saml_tool/signature'
 end
