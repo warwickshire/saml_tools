@@ -3,7 +3,7 @@ module SamlTool
   class Reader
     attr_reader :saml, :config, :namespaces
 
-    def initialize(saml, config = {}, namespaces = {})
+    def initialize(saml, config = {}, namespaces = nil)
       @saml = SamlTool::SAML(saml)
       @config = Hashie::Mash.new(config)
       @namespaces = namespaces
