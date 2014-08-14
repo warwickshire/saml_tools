@@ -10,6 +10,10 @@ module SamlTool
     def test_uuid
       assert_match /\_[a-z0-9\-]{36}/, settings.uuid
     end
+    
+    def test_uuid_does_not_change_once_set
+      assert_equal settings.uuid, settings.uuid
+    end
 
     def test_user_defined_uuid
       settings = Settings.new(uuid: 'foo')
