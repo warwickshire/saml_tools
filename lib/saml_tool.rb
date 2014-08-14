@@ -6,6 +6,7 @@ require 'securerandom'
 require 'base64'
 require 'zlib'
 require 'openssl'
+require 'xmldsig'
 
 module SamlTool
   require_relative 'saml_tool/validator'
