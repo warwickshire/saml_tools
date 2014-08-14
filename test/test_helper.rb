@@ -37,8 +37,8 @@ class Minitest::Test
     ).certificate
   end
   
-  def rsa_key
-    @rsa_key ||= OpenSSL::PKey::RSA.new(
+  def open_ssl_rsa_key
+    @open_ssl_rsa_key ||= OpenSSL::PKey::RSA.new(
       contents_of('files/userkey.pem'), 
       'hello'
     )

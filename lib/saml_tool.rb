@@ -18,4 +18,5 @@ module SamlTool
   require_relative 'saml_tool/response_reader'
   require_relative 'saml_tool/saml'
   require_relative 'saml_tool/certificate'
+  require_relative 'saml_tool/rsa_key'
 end

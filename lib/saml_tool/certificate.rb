@@ -4,10 +4,10 @@ module SamlTool
     
     alias_method :serial_number, :serial
   
-    def to_s_without_leading_and_trailing_labels
+    def without_leading_and_trailing_labels
       to_s.lines.to_a[1..-2].join
     end
-    alias_method :x509_certificate, :to_s_without_leading_and_trailing_labels
+    alias_method :x509_certificate, :without_leading_and_trailing_labels
     
     def issuer_name
       @issuer_name ||= slash_list_to_comma_list(issuer)
