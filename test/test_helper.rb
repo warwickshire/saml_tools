@@ -5,6 +5,14 @@ require 'minitest/autorun'
 require 'saml_tool'
 
 class Minitest::Test
+  
+  def valid_xml
+    '<foo>bar</foo>'
+  end
+
+  def saml
+    '<foo>something that behaves like saml</foo>'
+  end
 
   def valid_saml_request
     contents_of 'files/valid_saml_request.xml'
@@ -21,17 +29,23 @@ class Minitest::Test
   def open_saml_request
     contents_of 'files/open_saml_response.xml'
   end
+  
+  def x509_certificate
+    @x509_certificate ||= OpenSSL::PKCS12.new(
+      contents_of('files/usercert.p12'), 
+      'hello'
+    ).certificate
+  end
+  
+  def rsa_key
+    @rsa_key ||= OpenSSL::PKey::RSA.new(
+      contents_of('files/userkey.pem'), 
+      'hello'
+    )
+  end
 
   def contents_of(file_path)
     File.read File.expand_path(file_path, File.dirname(__FILE__))
-  end
-  
-  def valid_xml
-    '<foo>bar</foo>'
-  end
-
-  def saml
-    '<foo>something that behaves like saml</foo>'
   end
 
 end

@@ -1,5 +1,4 @@
 require_relative '../../test_helper'
-require "openssl"
 
 module SamlTool
   class ResponseReaderTest < Minitest::Test
