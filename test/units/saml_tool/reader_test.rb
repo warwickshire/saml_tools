@@ -44,6 +44,16 @@ module SamlTool
       assert_equal source.to_s, @reader.foo.source.to_s
       assert_equal @reader.foo, @reader.foo.source.to_s
     end
+
+    # If nokogiri is passed a namespace of {} it assumes an explicit entry of no namespaces.
+    # Whereas it sees nil namespaces as meaning namesspaces should be ignored.
+    # So nil should be the default behaviour, and can be overridden with {} as required.
+    # This reflects the normal Nokogiri behaviour that is more likely to be the expected
+    # behaviour.
+    def test_default_namespaces
+      reader = Reader.new(nested_saml)
+      assert_equal nil, reader.namespaces
+    end
     
     def test_to_hash
       reader = Reader.new(
