@@ -2,6 +2,63 @@
 
 Tools to simplify the creation, validation and sending of SAML objects
 
+== SamlTool::Certificate
+Version of OpenSSL::X509::Certificate that adds methods to simplify the retrieval
+of data used in SAML responses.
+
+== SamlTool::Decoder
+Decodes base64 and unzips content.
+
+== SamlTool::Encoder
+Zips content and base64 encodes it.
+
+== SamlTool::ErbBuilder
+Used to build SAML content from erb templates.
+
+    output = SamlTool::ErbBuilder.build(
+      template: '<foo><%= settings %></foo>',
+      settings: 'bar'
+    )
+    output == '<foo>bar</foo>'
+
+== SamlTool::Reader
+Wraps SAML documents and exposes data via methods
+
+    reader = SamlTool::Reader.new(
+               output,
+               {foo: '//foo/text()'}
+             )
+    reader.foo == 'bar'
+
+== SamlTool::Redirect
+Used to construct redirection uris
+
+      redirect = Redirect.uri(
+        to: 'http://example.com',
+        data: {
+          foo: 'bar'
+        }
+      )
+      redirect == "http://example.com?foo=bar"
+
+== SamlTool::ResponseReader
+A version of SamlTool::Reader tailored for handling SAML responses. It includes
+a valid? method that validates the SAML structure and checks the signature is
+correct.
+
+== SamlTool::RsaKey
+Version of OpenSSL::PKey::RSA that adds methods to simplify the retrieval
+of data used in SAML responses.
+
+== SamlTool::SAML
+A wrapper for Nokogiri::XML, that applies defaults that are appropriate for SAML
+
+== SamlTool::Settings
+Packages up settings so that can be more easily passed to other objects.
+
+== SamlTool::Validator
+Compares documents with SAML schemas to test if they have a valid structure.
+
 == Further reading
 
 I've {blogged here}[http://undervale.co.uk/blog/?p=490] about some of highs and
