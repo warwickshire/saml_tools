@@ -54,7 +54,7 @@ of data used in SAML responses.
 A wrapper for Nokogiri::XML, that applies defaults that are appropriate for SAML
 
 == SamlTool::Settings
-Packages up settings so that can be more easily passed to other objects.
+Packages up settings so that they can be more easily passed to other objects.
 
 == SamlTool::Validator
 Compares documents with SAML schemas to test if they have a valid structure.
