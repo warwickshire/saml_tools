@@ -1,6 +1,10 @@
 =SAML Tools
 
-Tools to simplify the creation, validation and sending of SAML objects
+Tools to simplify the creation, validation and sending of SAML objects.
+
+These tools are available as a gem:
+
+gem 'saml_tools'
 
 == SamlTool::Certificate
 Version of OpenSSL::X509::Certificate that adds methods to simplify the retrieval
@@ -63,3 +67,18 @@ Compares documents with SAML schemas to test if they have a valid structure.
 
 I've {blogged here}[http://undervale.co.uk/blog/?p=490] about some of highs and
 lows of building these tools.
+
+There is a demo app that I have been working with as I've developed these tools:
+
+  https://github.com/warwickshire/saml_tools_demo
+
+This work {nicked ideas from} has been greatly influenced by:
+
+*  https://github.com/onelogin/ruby-saml
+*  https://onelogin.zendesk.com/hc/en-us/articles/201175674-SAML-toolkit-for-Ruby-on-Rails
+*  http://samltool-j.appspot.com/saml_demo.jsp
+*  https://www.oasis-open.org/committees/documents.php?wg_abbrev=security
+*  http://en.wikipedia.org/wiki/SAML_2.0
+*  https://github.com/lawrencepit/ruby-saml-idp
+*  http://users.dcc.uchile.cl/~pcamacho/tutorial/web/xmlsec/xmlsec.html
+*  https://github.com/digidentity/libsaml

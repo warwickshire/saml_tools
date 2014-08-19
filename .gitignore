@@ -3,3 +3,6 @@
 
 # As this code is designed to used as a gem, ignore Gemfile.lock
 Gemfile.lock
+
+# Ignore gem files
+*.gem
