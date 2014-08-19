@@ -72,7 +72,7 @@ There is a demo app that I have been working with as I've developed these tools:
 
   https://github.com/warwickshire/saml_tools_demo
 
-This work {nicked ideas from} has been greatly influenced by:
+This work has been greatly influenced by:
 
 *  https://github.com/onelogin/ruby-saml
 *  https://onelogin.zendesk.com/hc/en-us/articles/201175674-SAML-toolkit-for-Ruby-on-Rails
