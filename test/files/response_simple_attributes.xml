@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<samlp:Response xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+                xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+                ID="GOSAMLR12901174571794"
+                Version="2.0"
+                IssueInstant="issue_instance"
+                Destination="{recipient}">
+  <saml:Assertion xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  Version="2.0"
+                  ID="GOSAMLR12901174571794">
+    <saml:AttributeStatement>
+      <saml:Attribute Name="One">
+        <saml:AttributeValue  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                              xsi:type="xs:string">1</saml:AttributeValue>
+      </saml:Attribute>
+      <saml:Attribute Name="Two">
+        <saml:AttributeValue  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                              xsi:type="xs:string">2</saml:AttributeValue>
+      </saml:Attribute>
+      <saml:Attribute Name="Three">
+        <saml:AttributeValue  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                              xsi:type="xs:string">3</saml:AttributeValue>
+      </saml:Attribute>
+    </saml:AttributeStatement>
+  </saml:Assertion>
+</samlp:Response>
