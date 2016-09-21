@@ -1,7 +1,16 @@
 require 'erb'
+
+# Used to build SAML content from erb templates.
+#
+#     output = SamlTool::ErbBuilder.build(
+#       template: '<foo><%= settings %></foo>',
+#       settings: 'bar'
+#     )
+#     output == '<foo>bar</foo>'
+#
 module SamlTool
   class ErbBuilder
-    
+
     attr_reader :args, :settings, :template
 
     def self.build(args)

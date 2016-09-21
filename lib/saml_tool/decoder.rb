@@ -1,4 +1,4 @@
-
+# Decodes base64 and unzips content.
 module SamlTool
   class Decoder
     attr_reader :saml

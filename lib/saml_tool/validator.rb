@@ -1,10 +1,11 @@
+# Compares documents with SAML schemas to test if they have a valid structure.
 module SamlTool
   class Validator
     attr_reader :saml
     def initialize(saml)
       @saml = saml
     end
-    
+
     def valid?
       validate
       errors.empty?

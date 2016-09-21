@@ -1,4 +1,12 @@
-
+# Wraps SAML documents and exposes data via methods
+#
+#     output == '<foo>bar</foo>'
+#     reader = SamlTool::Reader.new(
+#                output,
+#                {foo: '//foo/text()'}
+#              )
+#     reader.foo == 'bar'
+#
 module SamlTool
   class Reader
     attr_reader :saml, :config, :namespaces
@@ -23,12 +31,12 @@ module SamlTool
         instance_variable_set("@#{key}".to_sym, content)
       end
     end
-    
+
     # A string with memory of the element that was the source of its content.
     # Typically, the source will be a Nokogiri::XML::NodeSet. So:
     #     content           --> text from an element.
     #     content.source    --> the Nokogiri NodeSet the text was extracted from.
-    class Content < String    
+    class Content < String
       attr_reader :source
       def initialize(source)
         @source = source

@@ -1,5 +1,16 @@
 require 'uri'
 require 'cgi'
+
+#  Used to construct redirection uris
+#
+#        redirect = Redirect.uri(
+#          to: 'http://example.com',
+#          data: {
+#            foo: 'bar'
+#          }
+#        )
+#        redirect == "http://example.com?foo=bar"
+#
 module SamlTool
 
   class Redirect

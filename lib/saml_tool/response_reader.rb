@@ -1,5 +1,8 @@
 require "openssl"
 
+# A version of SamlTool::Reader tailored for handling SAML responses. It includes
+# a valid? method that validates the SAML structure and checks the signature is
+# correct.
 module SamlTool
   class ResponseReader < Reader
 
