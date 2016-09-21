@@ -1,4 +1,4 @@
-
+# Zips content and base64 encodes it.
 module SamlTool
   class Encoder
     attr_reader :saml
